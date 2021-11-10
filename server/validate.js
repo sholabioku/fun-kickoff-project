@@ -46,7 +46,7 @@ exports.validateCreateProfile = [
   )
     .not()
     .isEmpty({ min: 3, max: 255 }),
-  check('availability', 'Enter a valid date').isDate(),
+  check('availability', 'Enter a valid array of strings').isArray(),
   (req, res, next) => {
     const errors = validationResult(req);
 
