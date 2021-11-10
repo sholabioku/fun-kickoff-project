@@ -12,20 +12,29 @@ const ProfileSchema = new mongoose.Schema(
     },
     description: {
       type: String,
+    },
+    gender: {
+      type: String,
+    },
+    birthDate: {
+      type: Date,
+    },
+    email: {
+      type: String,
       required: true,
     },
-    availabiltity: [
-      {
-        from: {
-          type: Date,
-          required: true,
-        },
-        to: {
-          type: Date,
-          required: true,
-        },
-      },
-    ],
+    address: {
+      type: String,
+    },
+    availabiltity: {
+      type: Array,
+      default: [],
+    },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: true,
+    },
   },
   { timestamps: true }
 );
