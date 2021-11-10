@@ -9,7 +9,12 @@ exports.errorHandler = (err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+  let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+
+  if(err.name === 'CastError') {
+    err.message = `No resource foound for id ${err.value}`;
+    statusCode = 404;
+  }
 
   res.status(statusCode);
   res.json({ error: err.message });
