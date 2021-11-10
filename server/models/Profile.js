@@ -16,13 +16,6 @@ const ProfileSchema = new mongoose.Schema(
     gender: {
       type: String,
     },
-    birthDate: {
-      type: Date,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
     address: {
       type: String,
     },
