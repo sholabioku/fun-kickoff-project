@@ -10,6 +10,19 @@ exports.getProfiles = asyncHandler(async (req, res, next) => {
   res.status(200).json({success: true, data: profiles, count: profiles.length});
 })
 
+// @desc Get single profile
+// @route GET /profiles/:id
+// @access Public
+exports.getProfile = asyncHandler(async (req, res, next) => {
+  const profile = await Profile.findById(req.params.id);
+  if(!profile) {
+      res.status(404);
+      throw new Error(`No profile with id ${req.params.id}`);
+  };
+
+  res.status(200).json({success: true, data: profile})
+})
+
 //@desc Create a profile
 //@route POST /profile
 //@ access Private
