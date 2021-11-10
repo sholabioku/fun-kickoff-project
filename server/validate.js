@@ -33,8 +33,8 @@ exports.validateLogin = [
 
 exports.validateCreateProfile = [
   check('firstName', 'Please enter first name with 3 or more characters').not().isEmpty({min: 3}).isAlphanumeric(),
-  check('lastName', 'Please enter first name with 3 or more characters').not().isEmpty({min: 3}).isAlphanumeric(),
-  check('description', 'Please enter first name with 3 or more characters').not().isEmpty({min: 3, max: 255}),
+  check('lastName', 'Please enter last name with 3 or more characters').not().isEmpty({min: 3}).isAlphanumeric(),
+  check('description', 'Please enter description name with minimum of  3 characters or maximum of characters').not().isEmpty({min: 3, max: 255}),
   check('availability', 'Enter a valid date').isDate(),
   (req, res, next) => {
     const errors = validationResult(req);
