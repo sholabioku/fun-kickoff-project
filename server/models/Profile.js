@@ -20,10 +20,7 @@ const ProfileSchema = new mongoose.Schema(
     address: {
       type: String,
     },
-    availabiltity: {
-      type: Array,
-      default: [],
-    },
+    availabiltity: [String],
     user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
