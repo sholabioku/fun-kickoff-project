@@ -15,21 +15,12 @@ const ProfileSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-    },
-    birthDate: {
-      type: Date,
-    },
-    email: {
-      type: String,
-      required: true,
+      enum: ['male', 'female'],
     },
     address: {
       type: String,
     },
-    availabiltity: {
-      type: Array,
-      default: [],
-    },
+    availabiltity: [String],
     user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
