@@ -14,9 +14,18 @@ const ProfileSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    availabiltity: {
-      type: Date,
-    },
+    availabiltity: [
+      {
+        from: {
+          type: Date,
+          required: true,
+        },
+        to: {
+          type: Date,
+          required: true,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );
