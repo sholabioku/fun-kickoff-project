@@ -31,3 +31,21 @@ exports.createProfile = asyncHandler(async (req, res, next) => {
 
   res.status(201).json({success: true, data: profile})
 })
+
+// @desc Update profile
+// @route PUT /profiles/:id
+// @access Private
+exports.updateProfile = asyncHandler(async (req, res, next) => {
+  const profile = await Profile.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  })
+
+  if(!profile) {
+    res.status(404);
+    throw new Error(`No profile with id ${req.params.id}`);
+  };
+
+  res.status(200).json({success: true, data: profile})
+
+})
