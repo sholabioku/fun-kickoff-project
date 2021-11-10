@@ -30,3 +30,17 @@ exports.validateLogin = [
     next();
   }
 ];
+
+exports.validateCreateProfile = [
+  check('firstName', 'Please enter first name with 3 or more characters').not().isEmpty({min: 3}).isAlphanumeric(),
+  check('lastName', 'Please enter first name with 3 or more characters').not().isEmpty({min: 3}).isAlphanumeric(),
+  check('description', 'Please enter first name with 3 or more characters').not().isEmpty({min: 3, max: 255}),
+  check('availability', 'Enter a valid date').isDate(),
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty())
+      return res.status(400).json({ errors: errors.array() });
+    next();
+  }
+]
