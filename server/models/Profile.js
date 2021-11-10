@@ -14,15 +14,18 @@ const ProfileSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: true,
+    },
     availabiltity: [
       {
         from: {
           type: Date,
-          required: true,
         },
         to: {
           type: Date,
-          required: true,
         },
       },
     ],
