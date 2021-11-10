@@ -14,9 +14,8 @@ const ProfileSchema = new mongoose.Schema({
     required: true,
   },
   availabiltity: {
-    type: Boolean,
-    default: false,
-  }
+    type: Date,
+  },
 }, { timestamps: true })
 
 module.exports = Profile = mongoose.model("Profile", ProfileSchema);
