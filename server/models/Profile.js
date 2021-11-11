@@ -20,7 +20,24 @@ const ProfileSchema = new mongoose.Schema(
     address: {
       type: String,
     },
-    availabiltity: [String],
+    availability: [
+      {
+        day: {
+          type: String,
+          enum: [
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+          ],
+        },
+        time: String,
+        date: String,
+      },
+    ],
     user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
