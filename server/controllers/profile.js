@@ -49,9 +49,6 @@ exports.createProfile = asyncHandler(async (req, res, next) => {
 // @route PUT /profiles/:id
 // @access Private
 exports.updateProfile = asyncHandler(async (req, res, next) => {
-  const { firstName, lastName, description, gender, address, availability } =
-    req.body;
-
   const profile = await Profile.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
