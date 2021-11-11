@@ -19,7 +19,7 @@ router
 
 router
   .route('/:id')
-  .get(getProfile)
-  .put([protect, validateCreateProfile], updateProfile);
+  .get(validateObjectId, getProfile)
+  .put([protect, validateObjectId, validateCreateProfile], updateProfile);
 
 module.exports = router;
