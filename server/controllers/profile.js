@@ -32,17 +32,15 @@ exports.createProfile = asyncHandler(async (req, res, next) => {
   const { firstName, lastName, description, gender, address, availability } =
     req.body;
 
-  req.body.user = req.user.id;
-  const profile = new Profile({
+  const profile = await new Profile({
     firstName,
     lastName,
     description,
     gender,
     address,
     availability,
-  });
-
-  await profile.save();
+    user: req.user.id,
+  }).save();
 
   res.status(201).json({ success: true, data: profile });
 });
