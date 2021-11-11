@@ -52,21 +52,10 @@ exports.updateProfile = asyncHandler(async (req, res, next) => {
   const { firstName, lastName, description, gender, address, availability } =
     req.body;
 
-  const profile = await Profile.findByIdAndUpdate(
-    req.params.id,
-    {
-      firstName,
-      lastName,
-      description,
-      gender,
-      address,
-      availability,
-    },
-    {
-      new: true,
-      runValidators: true,
-    }
-  );
+  const profile = await Profile.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
 
   if (!profile) {
     res.status(404);
