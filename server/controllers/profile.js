@@ -29,8 +29,20 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
 //@route POST /profile
 //@ access Private
 exports.createProfile = asyncHandler(async (req, res, next) => {
+  const { firstName, lastName, description, gender, address, availability } =
+    req.body;
+
   req.body.user = req.user.id;
-  const profile = await Profile.create(req.body);
+  const profile = new Profile({
+    firstName,
+    lastName,
+    description,
+    gender,
+    address,
+    availability,
+  });
+
+  await profile.save();
 
   res.status(201).json({ success: true, data: profile });
 });
