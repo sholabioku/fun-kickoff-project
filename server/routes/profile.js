@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const validateObjectId = require('../middleware/validateObjectId');
+
 const {
   getProfiles,
   getProfile,
