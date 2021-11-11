@@ -49,15 +49,24 @@ exports.createProfile = asyncHandler(async (req, res, next) => {
 // @route PUT /profiles/:id
 // @access Private
 exports.updateProfile = asyncHandler(async (req, res, next) => {
-  const profile = await Profile.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  let profile = await Profile.findById(req.params.id);
 
   if (!profile) {
     res.status(404);
     throw new Error(`No profile with id ${req.params.id}`);
   }
+
+  if (profile.user !== req.user.id) {
+    res.status(401);
+    throw new Error(
+      `User ${req.user.id} is not authorized to update this profile`
+    );
+  }
+
+  profile = await Profile.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
 
   res.status(200).json({ success: true, data: profile });
 });
