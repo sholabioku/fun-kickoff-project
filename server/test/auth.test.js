@@ -8,6 +8,14 @@ chai.should();
 chai.use(chaiHttp);
 
 describe('Mocha test for auth controller', () => {
+  beforeEach(async () => {
+    await new User({
+      username: 'Bilush',
+      email: 'bilush@gmail.com',
+      password: '1234567',
+    }).save();
+  });
+
   afterEach(async () => {
     await User.deleteMany({});
   });
