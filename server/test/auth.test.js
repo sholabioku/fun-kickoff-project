@@ -44,5 +44,17 @@ describe('Mocha test for auth controller', () => {
       res.body.success.user.should.have.property('username');
       res.body.success.user.should.have.property('email');
     });
+
+    it('should return 400 if user already register', async () => {
+      const username = 'abcdef';
+      const email = 'bilush@gmail.com';
+      const password = '643434u34';
+      const res = await chai
+        .request(app)
+        .post('/auth/register')
+        .send({ username, email, password });
+
+      res.should.have.status(400);
+    });
   });
 });
