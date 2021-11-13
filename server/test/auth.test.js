@@ -19,9 +19,10 @@ describe('Mocha test for auth controller', () => {
   afterEach(async () => {
     await User.deleteMany({});
   });
-  const message = 'You have successfully logged out';
 
   describe('GET /auth/logout ', () => {
+    const message = 'You have successfully logged out';
+
     it('should return a successful response', async () => {
       const res = await chai.request(app).get('/auth/logout');
 
@@ -125,6 +126,13 @@ describe('Mocha test for auth controller', () => {
     it('should return 400 for bad request ', async () => {
       const res = await chai.request(app).post('/auth/login');
       res.should.have.status(400);
+    });
+  });
+
+  describe('GET /auth/user', () => {
+    it('should return 401 token is provided', async () => {
+      const res = await chai.request(app).get('/auth/user');
+      res.should.have.status(401);
     });
   });
 });
