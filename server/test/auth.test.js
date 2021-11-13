@@ -78,5 +78,16 @@ describe('Mocha test for auth controller', () => {
 
       res.should.have.status(400);
     });
+    it('should return 400 if password is less than 6 characters', async () => {
+      const username = 'abcsdetg';
+      const email = 'bilush2@gmail.com';
+      const password = '12345';
+      const res = await chai
+        .request(app)
+        .post('/auth/register')
+        .send({ username, email, password });
+
+      res.should.have.status(400);
+    });
   });
 });
