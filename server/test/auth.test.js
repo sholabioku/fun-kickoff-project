@@ -56,5 +56,16 @@ describe('Mocha test for auth controller', () => {
 
       res.should.have.status(400);
     });
+    it('should return 400 if username is empty', async () => {
+      const username = '';
+      const email = 'bilush1@gmail.com';
+      const password = '643434u34';
+      const res = await chai
+        .request(app)
+        .post('/auth/register')
+        .send({ username, email, password });
+
+      res.should.have.status(400);
+    });
   });
 });
