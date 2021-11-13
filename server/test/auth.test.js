@@ -104,5 +104,23 @@ describe('Mocha test for auth controller', () => {
       res.body.success.user.should.have.property('username');
       res.body.success.user.should.have.property('email');
     });
+    it('should return 401 if invalid email ', async () => {
+      const email = 'bilush!@gmail.com';
+      const password = '1234567';
+      const res = await chai
+        .request(app)
+        .post('/auth/login')
+        .send({ email, password });
+      res.should.have.status(401);
+    });
+    it('should return 401 if invalid password ', async () => {
+      const email = 'bilush@gmail.com';
+      const password = '12345678';
+      const res = await chai
+        .request(app)
+        .post('/auth/login')
+        .send({ email, password });
+      res.should.have.status(401);
+    });
   });
 });
