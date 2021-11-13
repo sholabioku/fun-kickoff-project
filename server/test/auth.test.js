@@ -90,4 +90,19 @@ describe('Mocha test for auth controller', () => {
       res.should.have.status(400);
     });
   });
+
+  describe('POST /auth/login', () => {
+    it('should login user', async () => {
+      const email = 'bilush@gmail.com';
+      const password = '1234567';
+      const res = await chai
+        .request(app)
+        .post('/auth/login')
+        .send({ email, password });
+      res.should.have.status(200);
+      res.body.success.user.should.have.property('id');
+      res.body.success.user.should.have.property('username');
+      res.body.success.user.should.have.property('email');
+    });
+  });
 });
