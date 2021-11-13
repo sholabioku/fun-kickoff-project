@@ -122,5 +122,9 @@ describe('Mocha test for auth controller', () => {
         .send({ email, password });
       res.should.have.status(401);
     });
+    it('should return 400 for bad request ', async () => {
+      const res = await chai.request(app).post('/auth/login');
+      res.should.have.status(400);
+    });
   });
 });
