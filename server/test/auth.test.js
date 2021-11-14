@@ -8,7 +8,7 @@ const generateToken = require('../utils/generateToken');
 chai.should();
 chai.use(chaiHttp);
 
-describe('Mocha test for auth controller', () => {
+describe('Authentication', () => {
   beforeEach(async () => {
     await new User({
       username: 'Bilush',
@@ -131,7 +131,7 @@ describe('Mocha test for auth controller', () => {
   });
 
   describe('GET /auth/user', () => {
-    it('should return 401 token is provided', async () => {
+    it('should return 401 if no token is provided ', async () => {
       const res = await chai.request(app).get('/auth/user');
       res.should.have.status(401);
     });
