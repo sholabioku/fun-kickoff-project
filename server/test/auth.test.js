@@ -3,6 +3,7 @@ const chaiHttp = require('chai-http');
 const { app } = require('../app.js');
 
 const User = require('../models/User');
+const generateToken = require('../utils/generateToken');
 
 chai.should();
 chai.use(chaiHttp);
@@ -133,6 +134,24 @@ describe('Mocha test for auth controller', () => {
     it('should return 401 token is provided', async () => {
       const res = await chai.request(app).get('/auth/user');
       res.should.have.status(401);
+    });
+
+    it('should load user', async () => {
+      const user = await new User({
+        username: 'Lukman',
+        email: 'lukman@gmail.com',
+        password: '1234567',
+      }).save();
+
+      const token = generateToken(user._id);
+      const res = await chai
+        .request(app)
+        .get('/auth/user')
+        .set('Cookie', `token=${token}`);
+      res.should.have.status(200);
+      res.body.success.user.should.have.property('id');
+      res.body.success.user.should.have.property('username');
+      res.body.success.user.should.have.property('email');
     });
   });
 });
