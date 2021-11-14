@@ -21,7 +21,7 @@ describe('Mocha test for auth controller', () => {
     await User.deleteMany({});
   });
 
-  describe('GET /auth/logout ', () => {
+  describe('GET /auth/logout', () => {
     const message = 'You have successfully logged out';
 
     it('should return a successful response', async () => {
