@@ -56,7 +56,7 @@ exports.updateProfile = asyncHandler(async (req, res, next) => {
     throw new Error(`No profile with id ${req.params.id}`);
   }
 
-  if (profile.user !== req.user.id) {
+  if (profile.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error(
       `User ${req.user.id} is not authorized to update this profile`
